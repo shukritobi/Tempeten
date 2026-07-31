@@ -1,14 +1,38 @@
 # Tempeten Storefront and Order System
 
-A mobile-first website and operational prototype for Tempeten, a homemade tempe daun business serving Banting and Seri Kembangan.
+A mobile-first storefront and business operations prototype for Tempeten, a homemade tempe daun business serving Banting and Seri Kembangan.
 
-## Preview pages
+## Preview
 
-- `index.html`: storefront, cart and checkout prototype
+Expected GitHub Pages URL:
+
+`https://shukritobi.github.io/Tempeten/`
+
+GitHub Pages must use **GitHub Actions** as its publishing source. The deployment workflow is already included in `.github/workflows/pages.yml`.
+
+## Main pages
+
+- `index.html`: storefront, products, cart, batch selection and checkout
 - `track.html`: customer order tracker
 - `admin.html`: operations dashboard demo
-- `SYSTEM.md`: production architecture and rollout plan
-- `worker/`: Cloudflare Worker starter for Billplz, Lalamove and D1
+- `SYSTEM.md`: architecture, workflow and rollout plan
+- `LAUNCH_CHECKLIST.md`: owner onboarding and production checklist
+- `WHATSAPP_MESSAGE.md`: personalised outreach message
+- `worker/`: Cloudflare Worker API for Billplz, Lalamove and D1
+
+## What works in preview mode
+
+- product catalogue and RM20 bundles
+- automatic Monday, Friday and Saturday production dates
+- four-day pre-order cutoff
+- pickup and delivery choices
+- estimated delivery pricing
+- cart and order summary
+- WhatsApp order fallback
+- local order tracking
+- owner dashboard, status changes, batch grouping and CSV export
+
+Preview orders are stored in the browser using `localStorage`. This is intentional so the site can be reviewed before live credentials are available.
 
 ## Local preview
 
@@ -22,17 +46,21 @@ Open `http://localhost:8000`.
 
 1. Create a Cloudflare D1 database and run `worker/schema.sql`.
 2. Copy `worker/wrangler.toml.example` to `worker/wrangler.toml`.
-3. Add Worker secrets:
-   - `BILLPLZ_SECRET_KEY`
-   - `BILLPLZ_COLLECTION_ID`
-   - `BILLPLZ_X_SIGNATURE`
-   - `LALAMOVE_API_KEY`
-   - `LALAMOVE_API_SECRET`
-   - `API_PUBLIC_URL`
+3. Add all secrets listed in `worker/README.md`.
 4. Deploy the Worker.
-5. Set `window.TEMPETEN_API_URL` before `assets/app.js`, or add a small `config.js` file.
-6. Test Billplz and Lalamove in sandbox before production.
+5. Set `window.TEMPETEN_API_URL` before loading `assets/app.js`.
+6. Test Billplz and Lalamove in sandbox.
+7. Replace sandbox endpoints and credentials only after full sign-off.
 
-## Important
+## Security
 
-The GitHub Pages preview intentionally keeps credentials out of the frontend. Without an API URL, checkout saves the order in localStorage and opens a WhatsApp confirmation message.
+- Billplz and Lalamove secrets stay in Cloudflare Worker secrets.
+- Product totals are recalculated by the server.
+- Billplz payment callbacks are verified using X Signature.
+- Lalamove calls are signed server-side.
+- Delivery booking requires an admin bearer token.
+- No provider secret is stored in GitHub Pages.
+
+## Current asset note
+
+The preview is connected to Tempeten's public Tally logo and cover image. The supplied original product photos should be uploaded into `assets/images/` and mapped in `assets/images.js` before the final public launch.
