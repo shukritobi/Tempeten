@@ -7,12 +7,20 @@ const TEMPETEN_IMAGES = {
   mini: 'https://storage.tally.so/3a852e04-e0e0-4176-8a9b-f315aab74c75/IMG_5182.jpeg'
 };
 
-Object.entries(TEMPETEN_IMAGES).forEach(([key, src]) => {
-  document.querySelectorAll(`[data-img="${key}"]`).forEach((img) => {
-    img.src = src;
-    img.addEventListener('error', () => {
-      img.removeAttribute('src');
-      img.alt = `${img.alt || 'Tempeten'} (imej tidak dapat dimuatkan)`;
-    }, { once: true });
+window.TEMPETEN_SET_IMAGE = (key, source) => {
+  document.querySelectorAll(`[data-img="${key}"]`).forEach((image) => {
+    image.src = source;
   });
+};
+
+Object.entries(TEMPETEN_IMAGES).forEach(([key, source]) => {
+  window.TEMPETEN_SET_IMAGE(key, source);
+});
+
+// Optimised WebP versions of the original supplied logo and product photos.
+['img-logo.js', 'img-classic.js', 'img-fusion.js'].forEach((file) => {
+  const script = document.createElement('script');
+  script.src = `assets/${file}`;
+  script.async = true;
+  document.head.appendChild(script);
 });
