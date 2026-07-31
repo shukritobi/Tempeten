@@ -63,4 +63,4 @@ Open `http://localhost:8000`.
 
 ## Current asset note
 
-The preview is connected to Tempeten's public Tally logo and cover image. The supplied original product photos should be uploaded into `assets/images/` and mapped in `assets/images.js` before the final public launch.
+The supplied Tempeten logo, Classic tempe photo and Fusion tempe photo are embedded as optimised WebP data assets. The Tally cover remains the fallback for the hero, soybeans and Mini Goodies slots until the remaining final images are embedded or uploaded as normal image files.
