@@ -1,5 +1,5 @@
 name = "tempeten-api"
-main = "index.js"
+main = "entry.js"
 compatibility_date = "2026-07-31"
 
 [[d1_databases]]
