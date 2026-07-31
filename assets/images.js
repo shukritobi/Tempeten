@@ -24,3 +24,22 @@ Object.entries(TEMPETEN_IMAGES).forEach(([key, source]) => {
   script.async = true;
   document.head.appendChild(script);
 });
+
+// app.js builds date values from local midnight using toISOString().
+// Browsers in Malaysia are ahead of UTC, so normalise the option values back
+// to the same calendar day shown in the Malay date label.
+const batchSelect = document.getElementById('batchSelect');
+if (batchSelect && new Date().getTimezoneOffset() < 0) {
+  const normaliseBatchValues = () => {
+    [...batchSelect.options].forEach((option) => {
+      if (!option.value || option.dataset.calendarFixed === 'true') return;
+      const date = new Date(`${option.value}T12:00:00Z`);
+      date.setUTCDate(date.getUTCDate() + 1);
+      option.value = date.toISOString().slice(0, 10);
+      option.dataset.calendarFixed = 'true';
+    });
+  };
+
+  new MutationObserver(normaliseBatchValues).observe(batchSelect, { childList: true });
+  normaliseBatchValues();
+}
