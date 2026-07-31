@@ -1,0 +1,43 @@
+name = "tempeten-api"
+main = "index.js"
+compatibility_date = "2026-07-31"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tempeten-orders"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+PUBLIC_SITE_URL = "https://shukritobi.github.io/Tempeten"
+PUBLIC_API_URL = "https://tempeten-api.YOUR-SUBDOMAIN.workers.dev"
+ALLOWED_ORIGINS = "https://shukritobi.github.io"
+
+# Sandbox first. Replace with production endpoints only after testing.
+BILLPLZ_BASE_URL = "https://www.billplz-sandbox.com"
+LALAMOVE_BASE_URL = "https://rest.sandbox.lalamove.com"
+LALAMOVE_MARKET = "MY"
+LALAMOVE_LANGUAGE = "en_MY"
+LALAMOVE_SERVICE_TYPE = "MOTORCYCLE"
+MAX_DELIVERY_VARIANCE_SEN = "300"
+
+SENDER_NAME = "Tempeten"
+SENDER_PHONE = "+601132099478"
+
+# Obtain exact coordinates for both pickup points before launch.
+PICKUP_SERI_KEMBANGAN_ADDRESS = "Pasar Borong Seri Kembangan, Lot 221, Selangor"
+PICKUP_SERI_KEMBANGAN_LAT = "REPLACE"
+PICKUP_SERI_KEMBANGAN_LNG = "REPLACE"
+
+PICKUP_BANTING_ADDRESS = "Taman Sri Putera, Banting, Selangor"
+PICKUP_BANTING_LAT = "REPLACE"
+PICKUP_BANTING_LNG = "REPLACE"
+
+# Add these as encrypted secrets, never commit their values:
+# wrangler secret put BILLPLZ_SECRET_KEY
+# wrangler secret put BILLPLZ_COLLECTION_ID
+# wrangler secret put BILLPLZ_X_SIGNATURE
+# wrangler secret put LALAMOVE_API_KEY
+# wrangler secret put LALAMOVE_API_SECRET
+# wrangler secret put LALAMOVE_WEBHOOK_TOKEN
+# wrangler secret put GOOGLE_MAPS_API_KEY
+# wrangler secret put ADMIN_TOKEN
